@@ -97,7 +97,7 @@ Agora para configurar o segundo shard deve-se seguir os mesmos passos da configu
 
 Para subir os containers basta digitar o comando abaixo modificando apenas o diretório do arquivo `.yaml` caso necessário.
 ```
-docker-compose -f shard/docker-compose.yaml up -d
+docker-compose -f shard2/docker-compose.yaml up -d
 ```
 
 Para iniciar o replica set é necessário se conectar com algum dos containers.
