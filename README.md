@@ -1,6 +1,6 @@
 # Como configurar as máquinas passo a passo
 
-## Config servers
+# Config servers
 
 O config server foi criado utilizando replica set para evitar erros caso uma máquina fique fora do ar. Para isso foram criados 3 containers utilizando docker na mesma VM do google cloud. Os três containers foram conectados entre si para funcionarem com replica set.
 
