@@ -1,0 +1,30 @@
+version: '3'
+services:
+    configServer1:
+        container_name: configServer1
+        image: mongo
+        command: mongod --configsvr --replSet configServer --port 27017 --dbpath /data/db
+        ports:
+            - 40001:27017
+        volumes:
+            - configServer1:/data/db
+    configServer2:
+        container_name: configServer2
+        image: mongo
+        command: mongod --configsvr --replSet configServer --port 27017 --dbpath /data/db
+        ports:
+            - 40002:27017
+        volumes:
+            - configServer2:/data/db
+    configServer3:
+        container_name: configServer3
+        image: mongo
+        command: mongod --configsvr --replSet configServer --port 27017 --dbpath /data/db
+        ports:
+            - 40003:27017
+        volumes:
+            - configServer3:/data/db
+volumes:
+    configServer1: {}
+    configServer2: {}
+    configServer3: {}

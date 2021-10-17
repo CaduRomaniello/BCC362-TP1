@@ -1,0 +1,9 @@
+version: '3'
+  
+services:
+    mongos:
+        container_name: mongos
+        image: mongo
+        command: mongos --configdb configServer/10.182.0.12:40001,10.182.0.12:40002,10.182.0.12:40003 --bind_ip 0.0.0.0 --port 27017
+        ports:
+        - 60000:27017
