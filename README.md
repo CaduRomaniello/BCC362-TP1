@@ -44,7 +44,7 @@ docker-compose -f shard1/docker-compose.yaml up -d
 
 Para iniciar o replica set é necessário se conectar com algum dos containers.
 ```
-mongo mongodb://<ip da máquina>:<porta do container 1>
+mongo mongodb://<ip da máquina do shard 1>:<porta do container 1>
 ```
 
 Feito isso, é necessário linkar as 3 máquinas em um replica set.
