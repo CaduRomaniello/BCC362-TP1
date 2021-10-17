@@ -14,7 +14,7 @@ Para iniciar o replica set é necessário se conectar com algum dos containers.
 mongo mongodb://<ip da máquina do config server>:<porta do container 1>
 ```
 
-Feito isso é necessário linkar as 3 máquinas em um replica set.
+Feito isso, é necessário linkar as 3 máquinas em um replica set.
 ```
 rs.initiate(
   {
@@ -35,7 +35,7 @@ rs.status()
 ```
 
 ## Shard 1
-Para permitir o escalonamento horizontal do banco ele foi configurado utilizando shard. Ele também foi criado utilizando replica set para evitar problemas caso uma das máquinas fiquem fora do ar do mesmo modo que o config server.
+O sharding foi utilizado para permitir o escalonamento horizontal do banco. As shards também utilizam replica set para evitar problemas caso alguma máquina fique fora do ar, do mesmo modo que o config server.
 
 Para subir os containers basta digitar o comando abaixo modificando apenas o diretório do arquivo `.yaml` caso necessário.
 ```
@@ -47,7 +47,7 @@ Para iniciar o replica set é necessário se conectar com algum dos containers.
 mongo mongodb://<ip da máquina>:<porta do container 1>
 ```
 
-Feito isso é necessário linkar as 3 máquinas em um replica set.
+Feito isso, é necessário linkar as 3 máquinas em um replica set.
 ```
 rs.initiate(
   {
@@ -69,7 +69,7 @@ rs.status()
 O shard será configurado posteriormente quando todos os shards estiverem configurados e em execução.
 
 ## Mongos Router
-O mongos também foi criado utilizando container para permitir sua protabilidade.
+O mongos também foi criado utilizando container para permitir sua portabilidade.
 
 Para subir o container basta digitar o comando abaixo modificando apenas o diretório do arquivo `.yaml` caso necessário.
 ```
@@ -87,17 +87,17 @@ Agora deve-se adicionar o shard criado anteriormente ao cluster.
 mongos> sh.addShard("<nome do replica set do shard 1>/<ip da maquina do shard 1>:<porta do containe 1>,<ip da maquina do shard 1>:<porta do containe 2>,<ip da maquina do shard 1>:<porta do containe 3>")
 ```
 
-Para verificar o status do shard e verificar se ele foia dicionado ao cluster digite:
+Para verificar o status do shard e verificar se ele foi adicionado ao cluster digite:
 ```
 mongos> sh.status()
 ```
 
 ## Shard 2
-Agora para configurar o segundo shard deve-se seguir os mesmos passos da configuração do primeiro shard
+Agora para configurar o segundo shard deve-se seguir os mesmos passos da configuração do primeiro shard.
 
 Para subir os containers basta digitar o comando abaixo modificando apenas o diretório do arquivo `.yaml` caso necessário.
 ```
-docker-compose -f shard2/docker-compose.yaml up -d
+docker-compose -f shard/docker-compose.yaml up -d
 ```
 
 Para iniciar o replica set é necessário se conectar com algum dos containers.
@@ -105,7 +105,7 @@ Para iniciar o replica set é necessário se conectar com algum dos containers.
 mongo mongodb://<ip da máquina do shard 2>:<porta do container 1>
 ```
 
-Feito isso é necessário linkar as 3 máquinas em um replica set.
+Feito isso, é necessário linkar as 3 máquinas em um replica set.
 ```
 rs.initiate(
   {
@@ -141,15 +141,14 @@ mongos> sh.status()
 ```
 
 ## Habilitando shard em um banco de dados e em uma coleção
-Após tudo isso o cluster já está funcionando porém é necessário permitir que um banco de dados esteja disponível para shard e logo após aplicar o shard em uma coleção para isso siga os seguintes passos:
+Após realizar os passos anteriores, o cluster já está funcionando. Porémm, é necessário habilitar e aplicar o sharding no banco de dados e na coleção em questão. Para tal, siga os seguintes passos:
 
-
-Conectar com o mongos
+Conectar com o mongos:
 ```
 mongo mongodb://<ip da máquina do mongos>:<porta do container do mongos>
 ```
 
-Permitir o sharding em um banco de dados MongoDB
+Permitir o sharding em um banco de dados MongoDB:
 ```
 mongos> sh.enableSharding("<nome do banco de dados>") 
 ```
@@ -159,7 +158,7 @@ Permitir o sharding em uma coleção MongoDB. Nessa etapa é necessário escolhe
 mongos> sh.shardCollection("<nome do banco de dados>.<nome da coleção>", {"_id": "hashed"}) 
 ```
 
-Com o sharding habilitado para verificaá-lo digite:
+Com o sharding habilitado para verificá-lo digite:
 ```
 mongos> sh.getShardDistribution()
 ```
