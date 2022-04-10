@@ -18,7 +18,7 @@ Feito isso, é necessário linkar as 3 máquinas em um replica set.
 ```
 rs.initiate(
   {
-    _id: "cfgrs",
+    _id: "configServer",
     configsvr: true,
     members: [
       { _id : 0, host : "<ip da máquina do config server>:<porta do container 1>" },
